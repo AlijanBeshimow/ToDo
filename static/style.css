@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin-left: 2%;
+}
+
+.navbar {
+    display: flex;
+    gap: 2vw;
+    background-color: #2564cf;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+.navbar a {
+    margin-left: 2%;
+    text-decoration: none;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+}
+
+.header {
+    display: flex;
+    width: 800px;
+    background-color: gainsboro;
+    border: 1px solid rgba(0, 0, 0, 0.194);
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 2%;
+}
+
+.tasks {
+    display: flex;
+    width: 800px;
+    margin-left: 2%;
+}
+
+.column {
+    flex: 1;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2%;
+    background-color: gainsboro;
+    width: 400px;
+}
+
+.input {
+    margin-left: 2%;
+}
+
+p {
+    margin-left: 2%;
+}
+
+.login {
+    display: flex;
+    gap: 2vw;
+    margin-left: 40%;
+}

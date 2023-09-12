@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Tasks</h1>
+
+<div class="header">
+    <div class="column">Task name</div>
+    <div class="column">Date</div>
+    <div class="column">Category</div>
+    <div class="column">Assigned</div>
+    <div class="column">Notes</div>
+    <div class="column">Delete</div>
+</div>
+{% for task in tasks %}
+{% if task[0] is not none %}
+
+<div class="tasks">
+    <div class="column">
+        {{ task[0].capitalize() }}
+    </div>
+
+    <div class="column">
+        {{ task[1] }}
+    </div>
+
+    <div class="column">
+        {{ task[2].capitalize() }}
+    </div>
+    <div class="column">
+        {{ task[3].capitalize() }}
+    </div>
+    <div class="column">
+        {{ task[4].capitalize() }}
+    </div>
+    <div class="column">
+        <form action="/delete" method="post" class="delete">
+            <input type="hidden" name="task_index" value="{{ loop.index0 }}">
+            <input type="submit" value="Delete">
+        </form>
+    </div>
+
+</div>
+
+{{ message }}
+
+
+
+
+{% endif %}
+
+{% endfor %}
+
+{% endblock %}
