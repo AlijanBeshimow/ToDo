@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+<title>{% block title %}View{% endblock %}</title>
 {% block content %}
 
 <h1>Tasks</h1>
@@ -11,6 +12,7 @@
     <div class="column">Notes</div>
     <div class="column">Delete</div>
 </div>
+
 {% for task in tasks %}
 {% if task[0] is not none %}
 
@@ -38,16 +40,14 @@
             <input type="submit" value="Delete">
         </form>
     </div>
-
 </div>
-
-{{ message }}
-
 
 
 
 {% endif %}
 
 {% endfor %}
+
+{{ message }}
 
 {% endblock %}

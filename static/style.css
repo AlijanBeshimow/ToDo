@@ -8,6 +8,7 @@ h1 {
 }
 
 .navbar {
+    overflow: hidden;
     display: flex;
     gap: 2vw;
     background-color: #2564cf;
@@ -38,6 +39,7 @@ h1 {
     display: flex;
     width: 800px;
     margin-left: 2%;
+    margin-top: 1%;
 }
 
 .column {
@@ -60,8 +62,14 @@ p {
     margin-left: 2%;
 }
 
-.login {
-    display: flex;
-    gap: 2vw;
-    margin-left: 40%;
+
+.error {
+    margin-left: 2%;
+}
+
+.search {
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+
 }

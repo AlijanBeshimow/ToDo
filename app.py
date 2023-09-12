@@ -22,20 +22,22 @@ def save(tasks):
 
 @app.route('/')
 def welcome_page():
-    return render_template("home.html")
+    return render_template("home.html", title="Home")
 
 
-@app.route('/add')
+@app.route('/add', methods=['GET', 'POST'])
 def add():
     global tasks
-    username = request.args.get("username")
-    date = request.args.get("date")
-    category = request.args.get("category")
-    assigned = request.args.get("assigned")
-    notes = request.args.get("notes")
-    new_task = (username, date, category, assigned, notes)
-    tasks.append(new_task)
-    save(tasks)
+    if request.method == 'POST':
+        username = request.form.get("username")
+        date = request.form.get("date")
+        category = request.form.get("category")
+        assigned = request.form.get("assigned")
+        notes = request.form.get("notes")
+        new_task = (username, date, category, assigned, notes)
+        tasks.append(new_task)
+        save(tasks)
+        return redirect('/view')
     return render_template("add.html")
 
 
@@ -66,7 +68,7 @@ def search():
         if search in task:
             filtered_tasks.append(task)
     if not filtered_tasks:
-        return render_template("view.html", message="Product not Found")
+        return render_template("error.html", message="Task not Found")
     return render_template("view.html", tasks=filtered_tasks)
 
 
