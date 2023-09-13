@@ -12,22 +12,19 @@ def load():
         return []
 
 
-tasks = load()
-
-
 def save(tasks):
     with open("tasks.pickle", 'wb') as file:
         pickle.dump(tasks, file)
 
 
 @app.route('/')
-def welcome_page():
-    return render_template("home.html", title="Home")
+def hello():
+    return render_template('home.html')
 
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
-    global tasks
+    tasks = load()
     if request.method == 'POST':
         username = request.form.get("username")
         date = request.form.get("date")
@@ -43,13 +40,13 @@ def add():
 
 @app.route('/view')
 def view():
-    global tasks
+    tasks = load()
     return render_template("view.html", tasks=tasks)
 
 
 @app.route('/delete', methods=['POST'])
 def delete_task():
-    global tasks
+    tasks = load()
     task_index = int(request.form.get("task_index"))
 
     if 0 <= task_index < len(tasks):
@@ -61,7 +58,7 @@ def delete_task():
 
 @app.route('/search')
 def search():
-    global tasks
+    tasks = load()
     search = request.args.get("search")
     filtered_tasks = []
     for task in tasks:
