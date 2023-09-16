@@ -1,7 +1,13 @@
 import pickle
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 
 app = Flask(__name__)
+
+app.secret_key = "12312323423wddasdsadasd"
+
+users = [{"tal": "admin"},
+         {"gal": "admin"},
+         {"alex", "admin"}]
 
 
 def load():
@@ -19,23 +25,33 @@ def save(tasks):
 
 @app.route('/')
 def hello():
-    return render_template('home.html')
+    if session.get("username", "") == "tal":
+        return render_template('home.html')
+    if session.get("username", "") == "gal":
+        return render_template('home.html')
+    if session.get("username", "") == "alex":
+        return render_template('home.html')
+    else:
+        return redirect('/login')
 
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
-    tasks = load()
-    if request.method == 'POST':
-        username = request.form.get("username")
-        date = request.form.get("date")
-        category = request.form.get("category")
-        assigned = request.form.get("assigned")
-        notes = request.form.get("notes")
-        new_task = (username, date, category, assigned, notes)
-        tasks.append(new_task)
-        save(tasks)
-        return redirect('/view')
-    return render_template("add.html")
+    if session.get("username"):
+        tasks = load()
+        username = session["username"]
+        if request.method == 'POST':
+            name = request.form.get("name")
+            date = request.form.get("date")
+            category = request.form.get("category")
+            notes = request.form.get("notes")
+            new_task = (name, date, category, username, notes)
+            tasks.append(new_task)
+            save(tasks)
+            return redirect('/view')
+        return render_template("add.html")
+    else:
+        return redirect('/login')
 
 
 @app.route('/view')
@@ -72,3 +88,20 @@ def search():
 @app.route('/update')
 def update():
     return render_template("update.html")
+
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    if request.method == 'GET':
+        return render_template("login.html")
+    else:
+        if {request.form["username"] in users} and (request.form["password"] == "admin"):
+            session["username"] = request.form["username"]
+            return redirect('/')
+        return render_template("login.html", message="incorrect user or password")
+
+
+@app.route('/logout')
+def logout():
+    session.pop("username", None)
+    return redirect('/login')

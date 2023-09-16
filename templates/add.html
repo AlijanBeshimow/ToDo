@@ -6,7 +6,7 @@
 
 <div class="container">
     <form action="/add" method="post">
-        <p>Task name <input type="text" name="username" placeholder="Name" required class="input"></p>
+        <p>Task name <input type="text" name="name" placeholder="Name" required class="input"></p>
         <p>Date<input type="date" name="date" class="input"></p>
         <p>Category <select name="category" required class="input">
                 <option value="Home">Home</option>
@@ -15,7 +15,6 @@
                 <option value="Job">Job</option>
                 <option value="Sport">Sport</option>
             </select></p>
-        <p>Assigne to<input type="text" name="assigned" placeholder="Enter you name" required class="input"></p>
         <p>Notes
         <p><textarea name="notes" id="" cols="30" rows="10"></textarea></p>
         <p><input type="submit" value="Add"></p>

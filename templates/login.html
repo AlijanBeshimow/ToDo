@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="/static/login.css">
+<div class="login">
+    <form action="/login" method="post" class="log">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <div class="button-container">
+            <input type="submit" value="Sign in" class="submit">
+            <form action="/register">
+                <input type="submit" value="Sign up" class="submit">
+            </form>
+        </div>
+        <div class="message">{{ message }}</div>
+    </form>
+</div>
