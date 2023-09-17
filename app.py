@@ -5,9 +5,7 @@ app = Flask(__name__)
 
 app.secret_key = "12312323423wddasdsadasd"
 
-users = [{"tal": "admin"},
-         {"gal": "admin"},
-         {"alex", "admin"}]
+users = {"tal": "admin", "gal": "admin", "alex": "admin"}
 
 
 def load():
@@ -25,11 +23,8 @@ def save(tasks):
 
 @app.route('/')
 def hello():
-    if session.get("username", "") == "tal":
-        return render_template('home.html')
-    if session.get("username", "") == "gal":
-        return render_template('home.html')
-    if session.get("username", "") == "alex":
+    username = session.get("username")
+    if username in users:
         return render_template('home.html')
     else:
         return redirect('/login')
@@ -56,8 +51,16 @@ def add():
 
 @app.route('/view')
 def view():
-    tasks = load()
-    return render_template("view.html", tasks=tasks)
+    if session.get("username"):
+        username = session["username"]
+        tasks = load()
+        user_tasks = []
+        for task in tasks:
+            if task[3] == username:
+                user_tasks.append(task)
+        return render_template("view.html", tasks=user_tasks)
+    else:
+        return redirect('/login')
 
 
 @app.route('/delete', methods=['POST'])
@@ -105,3 +108,15 @@ def login():
 def logout():
     session.pop("username", None)
     return redirect('/login')
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form.get("username")
+        password = request.form.get("password")
+        if username in users:
+            return render_template("register.html", message="Username already exists")
+        users[username] = password
+        return redirect('/login')
+    return render_template("register.html")
