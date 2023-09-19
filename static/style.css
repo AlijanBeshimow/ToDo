@@ -9,7 +9,6 @@ h1 {
 }
 
 .navbar {
-    overflow: hidden;
     display: flex;
     gap: 2vw;
     background-color: #2564cf;

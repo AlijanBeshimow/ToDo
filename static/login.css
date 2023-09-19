@@ -24,6 +24,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 2px;
+
 }
 
 .message {
@@ -35,6 +36,10 @@ body {
 }
 
 .submit {
+    width: 60px;
+    margin-bottom: -10px;
+}
+
+.reg {
     margin-top: 10px;
-    width: 70px;
 }
