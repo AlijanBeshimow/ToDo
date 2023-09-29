@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+<title>{% block title %}Profile{% endblock %}</title>
+{% block content %}
+
+<h2 class="h2">Welcome to your profile, {{ user[1].capitalize() }}!</h2>
+
+<div class="user_details">
+    <span>Username: {{ user[1] }} </span>
+    <span>Password: {{ user[2] }} </span>
+</div>
+
+<a href="/"><button class="back">Home</button></a>
+
+{% endblock content %}

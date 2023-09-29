@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="h2">Edit Task</h2>
+
+<div class="container">
+    <form action="/edit/{{ task[0] }}" method="post">
+        <p>Task name <input type="text" name="name" value="{{ task[1] }}" placeholder="Name" required class="input">
+        </p>
+        <p>Date <input type="date" name="date" value="{{ task[2] }}" required class="input"></p>
+        <p>Category <select name="category" required class="input">
+                <option value="">Choose Category</option>
+                <option value="Job" {% if task[3]=='Job' %}selected{% endif %}>Job</option>
+                <option value="Cleaning" {% if task[3]=='Cleaning' %}selected{% endif %}>Cleaning</option>
+                <option value="Shop" {% if task[3]=='Shop' %}selected{% endif %}>Shop</option>
+                <option value="Sport" {% if task[3]=='Sport' %}selected{% endif %}>Sport</option>
+            </select></p>
+        <p>Notes
+            <textarea name="notes" id="notes" cols="30" rows="10" class="notes">{{ task[5] }}</textarea>
+            <input type="submit" value="Save" class="save">
+        </p>
+    </form>
+</div>
+
+{% endblock content %}

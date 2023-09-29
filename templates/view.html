@@ -2,51 +2,53 @@
 <title>{% block title %}View{% endblock %}</title>
 {% block content %}
 
-<h1>Tasks</h1>
-
 <div class="header">
     <div class="column">Task name</div>
     <div class="column">Date</div>
     <div class="column">Category</div>
     <div class="column">Assigned</div>
     <div class="column">Notes</div>
-    <div class="column">Delete</div>
+    <div class="column">Actions</div>
 </div>
 
 {% for task in tasks %}
-{% if task[0] is not none %}
-
 <div class="tasks">
     <div class="column">
-        {{ task[0].capitalize() }}
+        {{ task[1].capitalize() }}
     </div>
 
     <div class="column">
-        {{ task[1] }}
-    </div>
-
-    <div class="column">
-        {{ task[2].capitalize() }}
+        {{ task[2]}}
     </div>
     <div class="column">
-        {{ task[3].capitalize() }}
+        {{ task[3].capitalize()}}
     </div>
     <div class="column">
-        {{ task[4].capitalize() }}
+        {{ task[4].capitalize()}}
     </div>
     <div class="column">
-        <form action="/delete" method="post" class="delete">
-            <input type="hidden" name="task_index" value="{{ loop.index0 }}">
-            <input type="submit" value="Delete">
-        </form>
+        {{ task[5]}}
+    </div>
+    <div class="column">
+        <div class="action">
+            <a href="/edit/{{ task[0] }}" class="icon-button">
+                <i class="fa fa-edit"></i>
+            </a>
+            <form action="/delete" method="post" class="delete"
+                onsubmit="return confirm('Are you sure you want to delete this task?')">
+                <input type="hidden" name="task_id" value="{{ task[0] }}">
+                <button type="submit" class="icon-button">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </form>
+        </div>
     </div>
 </div>
 
-
-
-{% endif %}
-
 {% endfor %}
+
+<a href="/"><button class="back">Home</button></a>
+
 
 {{ message }}
 
